@@ -2,6 +2,7 @@
 import { Container, Box, Button } from '@mui/material';
 import TypingAnimation from '../components/shared/typer/TypingAnimation';
 import CollectionPage from '../components/media/Collection';
+import WelcomeMessage from '../components/media/WelcomeMessage';
 
 interface HomePageProps {
     isLoggedIn: boolean; // Define the type of isLoggedIn prop
