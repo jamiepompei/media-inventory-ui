@@ -2,13 +2,10 @@ import { Box, Button, List, ListItem, ListItemText, Typography} from '@mui/mater
 import { MediaItem } from '../shared/Types';
 import { useLocation } from 'react-router-dom';
 
-interface MediaItemProps {
-    role: string;
-  }
-
-const Media: React.FC<MediaItemProps> = ({ role}) => {
+const Media = () => {
   const location = useLocation();
   const media = location.state?.media as MediaItem;
+  const userRole = location.state?.userRole as string;
 
     return (
         <Box mt={5}>
@@ -19,7 +16,10 @@ const Media: React.FC<MediaItemProps> = ({ role}) => {
                   primary={media.title} 
                   secondary={`${media.type} - ${media.genre || media.author || media.artist}`} 
                 />
-                 {role === "admin" && <Button>Edit Media Item</Button>}
+                 {userRole === "admin" && <Button
+                 variant="contained" color="primary" 
+                 size="small"
+                 >Edit Media Item</Button>}
               </ListItem>
           </List>
         </Box>

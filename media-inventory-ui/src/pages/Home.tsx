@@ -15,7 +15,7 @@ const HomePage: React.FC<HomePageProps> = ({ isLoggedIn, collections }) => {
          {isLoggedIn ? (
             <>
             <Box width={"100%"} height={"100%"} marginTop={10} />
-            <CollectionsPage collections={collections} role={"admin"}></CollectionsPage>
+            <CollectionsPage collections={collections} userRole={"admin"}></CollectionsPage>
             <Box width={"100%"} height={"100%"} />
             </>
           ) : (

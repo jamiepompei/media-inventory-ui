@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
-import { Container, Box, Typography, ImageList, ImageListItem} from '@mui/material';
+import React from 'react';
+import { Container, Box, Typography, ImageList, ImageListItem, Button} from '@mui/material';
 import WelcomeMessage from './WelcomeMessage';
 import { Collection } from '../shared/Types'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface CollectionPagesProps {
   collections: Collection[];
-  role: string;
+  userRole: string;
 }
 
-
-const CollectionsPage: React.FC<CollectionPagesProps> = ({ collections, role }) =>  {
+const CollectionsPage: React.FC<CollectionPagesProps> = ({ collections, userRole }) =>  {
     const navigate = useNavigate();
 
     const user = {
       userName: "Jamie",
-      role: {role},
+      userRole: {userRole},
       isCollectionEmpty: () => isCollectionEmpty(collections)
     }
 
@@ -25,7 +24,7 @@ const CollectionsPage: React.FC<CollectionPagesProps> = ({ collections, role }) 
 
     const handleClick = (collection: Collection) => {
       console.log("clicked collection:", collection);
-      navigate(`/collection/${collection.id}`, { state: { collection } });
+      navigate(`/collection/${collection.id}`, { state: { collection, userRole } });
     }
 
     return (
@@ -53,24 +52,28 @@ const CollectionsPage: React.FC<CollectionPagesProps> = ({ collections, role }) 
                     </Box>
                   </ImageListItem>
                 ))}
+                 {userRole === "admin" && 
+              <Button 
+              variant="contained" color="primary" 
+              size="large"
+               >
+                Edit Collections
+               </Button>
+            }
               </ImageList>
             ) : (
               <Box height="100%" display="flex" justifyContent="center" alignItems="center">
                 <Box>
-                  <Box
-                    display="flex"
-                    mt="50px"
-                    alignItems="center"
-                    justifyContent="center"
-                    height="15vh"
-                    border="2px solid #ccc"
-                    borderRadius="8px"
-                    sx={{ cursor: 'pointer', textAlign: 'center' }}
-                  >
-                    <Typography variant="h6" sx={{ padding: '50px' }}>Create a Collection</Typography>
+                    {userRole === "admin" && 
+                    <Typography variant="h6" sx={{ padding: '50px' }}>Create a Collection</Typography> &&
+                    <Button 
+                    variant="contained" color="primary" 
+                    size="large"
+                    >Create Collection</Button>
+                  }
                   </Box>
                 </Box>
-              </Box>
+             
             )}
         </Container>
         </>

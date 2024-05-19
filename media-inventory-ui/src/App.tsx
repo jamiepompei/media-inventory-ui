@@ -42,8 +42,8 @@ const App: React.FC = () => {
     <Header />
       <Routes>
         <Route path="/" element={<Home isLoggedIn={true} collections={userCollections} />} />
-        <Route  path="/collection/:id" element={<CollectionItem role={"admin"} />} />
-        <Route  path="/media/:id" element={<Media role={"admin"} />} />
+        <Route  path="/collection/:id" element={<CollectionItem />} />
+        <Route  path="/media/:id" element={<Media />} />
       </Routes>
   </main>
   );  
