@@ -1,31 +1,33 @@
+import React, { useState } from 'react';
 import { Container, Box, Typography, ImageList, ImageListItem} from '@mui/material';
 import WelcomeMessage from './WelcomeMessage';
+import { Collection } from '../shared/Types'
+import { Link, useNavigate } from 'react-router-dom';
 
-// Sample data for user collections
-const userCollections = [
-    // { id: 1, name: 'Movies' },
-    // { id: 2, name: 'Books' },
-    // { id: 3, name: 'Music' },
-  ];
-
-const user = {
-  userName: "Jamie",
-  isCollectionEmpty: () => isCollectionEmpty(userCollections)
+interface CollectionPagesProps {
+  collections: Collection[];
+  role: string;
 }
 
-const isCollectionEmpty = (collection: any) => {
-  return collection.length === 0;
-}
 
-const handleClick = (id: number | null) => {
-  if (id == null) {
-    console.log("clicked create new collection");
-  } else {
-    console.log("clicked collection id:",id);
-  }
-}
-  
-  const CollectionPage = () => {
+const CollectionsPage: React.FC<CollectionPagesProps> = ({ collections, role }) =>  {
+    const navigate = useNavigate();
+
+    const user = {
+      userName: "Jamie",
+      role: {role},
+      isCollectionEmpty: () => isCollectionEmpty(collections)
+    }
+
+    const isCollectionEmpty = (collection: Collection[]) => {
+      return collection.length === 0;
+    }
+
+    const handleClick = (collection: Collection) => {
+      console.log("clicked collection:", collection);
+      navigate(`/collection/${collection.id}`, { state: { collection } });
+    }
+
     return (
       <>
       <Box sx={{ mb: '10px' }}>
@@ -33,10 +35,10 @@ const handleClick = (id: number | null) => {
         ></WelcomeMessage>
       </Box>
         <Container>
-            {userCollections.length > 0 ? (
+            {collections.length > 0 ? (
               <ImageList cols={3} gap={16}>
-                {userCollections.map((collection) => (
-                  <ImageListItem key={collection.id} onClick={() => handleClick(collection.id)}>
+                {collections.map((collection) => (
+                  <ImageListItem key={collection.id} onClick={() => handleClick(collection)}>
                     <Box
                       mt="50px"
                       display="flex"
@@ -64,7 +66,6 @@ const handleClick = (id: number | null) => {
                     border="2px solid #ccc"
                     borderRadius="8px"
                     sx={{ cursor: 'pointer', textAlign: 'center' }}
-                    onClick={() => handleClick(null)}
                   >
                     <Typography variant="h6" sx={{ padding: '50px' }}>Create a Collection</Typography>
                   </Box>
@@ -76,4 +77,4 @@ const handleClick = (id: number | null) => {
       );
   };
   
-  export default CollectionPage;
+  export default CollectionsPage;

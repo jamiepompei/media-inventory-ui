@@ -1,20 +1,21 @@
 
 import { Container, Box, Button } from '@mui/material';
 import TypingAnimation from '../components/shared/typer/TypingAnimation';
-import CollectionPage from '../components/media/Collection';
-import WelcomeMessage from '../components/media/WelcomeMessage';
+import CollectionsPage from '../components/media/Collections';
+import { Collection } from "../components/shared/Types";
 
 interface HomePageProps {
     isLoggedIn: boolean; // Define the type of isLoggedIn prop
+    collections: Collection[];
   }
 
-const HomePage: React.FC<HomePageProps> = ({ isLoggedIn }) => {
+const HomePage: React.FC<HomePageProps> = ({ isLoggedIn, collections }) => {
   return (
     <Container>
          {isLoggedIn ? (
             <>
             <Box width={"100%"} height={"100%"} marginTop={10} />
-            <CollectionPage></CollectionPage>
+            <CollectionsPage collections={collections} role={"admin"}></CollectionsPage>
             <Box width={"100%"} height={"100%"} />
             </>
           ) : (
