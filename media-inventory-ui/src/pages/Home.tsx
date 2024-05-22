@@ -5,7 +5,7 @@ import CollectionsPage from '../components/media/Collections';
 import { Collection } from "../components/shared/Types";
 
 interface HomePageProps {
-    isLoggedIn: boolean; // Define the type of isLoggedIn prop
+    isLoggedIn: boolean;
     collections: Collection[];
   }
 
