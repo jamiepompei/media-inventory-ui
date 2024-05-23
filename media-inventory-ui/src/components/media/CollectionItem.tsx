@@ -4,12 +4,8 @@ import {
   List,
   ListItem,
   ListItemText,
-  IconButton, 
-  ListItemSecondaryAction,
-  Typography
+  Typography,
 } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { Collection, MediaItem } from "../shared/Types";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -48,26 +44,17 @@ const CollectionItem = () => {
       </Box>
       <List>
         {userRole === "admin" && (
-           <div style={{ display: 'flex', gap: '10px' }}>
-           <Button 
-             variant="contained" color="primary" 
-             size="large"
-           >
-             Create New Media
-           </Button> 
-           <Button 
-             variant="contained" color="primary" 
-             size="large"
-           >
-             Update Collection
-           </Button>
-           <Button 
-             variant="contained" color="primary" 
-             size="large"
-           >
-             Delete Collection
-           </Button>
-         </div>
+          <div style={{ display: "flex", gap: "10px" }}>
+            <Button variant="contained" color="primary" size="large">
+              Create New Media
+            </Button>
+            <Button variant="contained" color="primary" size="large">
+              Update Collection
+            </Button>
+            <Button variant="contained" color="primary" size="large">
+              Delete Collection
+            </Button>
+          </div>
         )}
         {collection.mediaItems.map((item) => (
           <ListItem
@@ -81,9 +68,13 @@ const CollectionItem = () => {
                 item.genre || item.author || item.artist
               }`}
             />
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <Button variant="outlined" color="primary" size="small">Edit</Button>
-              <Button variant="outlined" color="error" size="small">Delete</Button>
+            <div style={{ display: "flex", gap: "10px" }}>
+              <Button variant="outlined" color="primary" size="small">
+                Edit
+              </Button>
+              <Button variant="outlined" color="error" size="small">
+                Delete
+              </Button>
             </div>
           </ListItem>
         ))}
