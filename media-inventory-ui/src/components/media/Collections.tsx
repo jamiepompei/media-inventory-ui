@@ -35,7 +35,29 @@ const CollectionsPage: React.FC<CollectionPagesProps> = ({ collections, userRole
       </Box>
         <Container>
             {collections.length > 0 ? (
-              <ImageList cols={3} gap={16}>
+               <> 
+               {userRole === "admin" &&
+               <div style={{ display: 'flex', gap: '10px' }}>
+              <Button
+                variant="contained" color="primary"
+                size="large"
+              >
+                Update Collections
+              </Button>
+              <Button
+                variant="contained" color="primary"
+                size="large"
+              >
+                Create Collection
+              </Button>
+              <Button
+                variant="contained" color="primary"
+                size="large"
+              >
+                Delete Collection
+              </Button>
+            </div>
+               }<ImageList cols={3} gap={16}>
                 {collections.map((collection) => (
                   <ImageListItem key={collection.id} onClick={() => handleClick(collection)}>
                     <Box
@@ -52,15 +74,7 @@ const CollectionsPage: React.FC<CollectionPagesProps> = ({ collections, userRole
                     </Box>
                   </ImageListItem>
                 ))}
-                 {userRole === "admin" && 
-              <Button 
-              variant="contained" color="primary" 
-              size="large"
-               >
-                Edit Collections
-               </Button>
-            }
-              </ImageList>
+              </ImageList></>
             ) : (
               <Box height="100%" display="flex" justifyContent="center" alignItems="center">
                 <Box>
@@ -69,7 +83,7 @@ const CollectionsPage: React.FC<CollectionPagesProps> = ({ collections, userRole
                     <Button 
                     variant="contained" color="primary" 
                     size="large"
-                    >Create Collection</Button>
+                    >Create NewCollection</Button>
                   }
                   </Box>
                 </Box>
